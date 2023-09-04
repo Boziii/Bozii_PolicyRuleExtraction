@@ -62,7 +62,7 @@ classification_tree = tree.DecisionTreeClassifier(random_state=0, ccp_alpha=0.01
 classification_tree = classification_tree.fit(stateDataset, actionDataset)
 
 
-
+#chang filename to right path
 joblib.dump(classification_tree, "ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
 del classification_tree
 classification_tree = joblib.load("ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
@@ -87,7 +87,7 @@ _ = tree.plot_tree(classification_tree,
                    filled=True,
                    fontsize = 10)
 
-fig.savefig("lander_decistion_tree.png")
+fig.savefig("assets/lander_decistion_tree01.png")
 
 
 
