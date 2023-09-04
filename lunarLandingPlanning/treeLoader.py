@@ -18,6 +18,7 @@ print(text_representation)
 
 obs = env.reset()
 #print(obs)
+#test comment
 
 
 ruleExtractorVar = ruleExtractor()
