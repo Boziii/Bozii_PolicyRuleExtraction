@@ -40,6 +40,10 @@ class conditionClass:
     def toString(self):
         conditionString = "if"+self.getConditionString()+" then"
         return conditionString
+    
+    def toPython(self):
+        conditionString = "if"+self.getConditionString()+":"
+        return conditionString
 
 class actionLeaf:
     def __init__(self, classNames, action):
@@ -48,6 +52,9 @@ class actionLeaf:
         
     def toString(self):
         return self.actionString
+    
+    def toPython(self):
+        return "return True"
 
         
 class ruleTreeNode:
@@ -99,6 +106,29 @@ class ruleTreeNode:
             treeString += " R\n"+self.rightChild.toStringHelper(indent)
         else:
             treeString = oldIndent + self.data.toString()
+        return treeString
+    
+    def toPython(self, indent):
+        treeString = ""
+        if(self.data != []):
+            treeString += self.toPythonHelper(indent)
+        return treeString
+    
+    def toPythonHelper(self, indent):
+        treeString = ""
+        oldIndent = indent
+        indent += "\t"
+        if(self.leftChild != None):
+            treeString = oldIndent + self.data.toPython()
+            treeString += "\n"+self.leftChild.toPythonHelper(indent)
+            if(self.rightChild != None):
+                treeString += "\n"+oldIndent+"else:"
+                treeString += "\n"+self.rightChild.toPythonHelper(indent)
+        elif(self.rightChild != None):
+            treeString = oldIndent + self.data.toPython()
+            treeString += "\n"+self.rightChild.toPythonHelper(indent)
+        else:
+            treeString = oldIndent + self.data.toPython()
         return treeString
             
 class sNode:

@@ -193,5 +193,5 @@ class ruleExtractor:
     
         print("\n\n")
         
-        return 0
+        return ruleTreeList
         
