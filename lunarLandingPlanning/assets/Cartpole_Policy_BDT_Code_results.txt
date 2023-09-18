@@ -1,0 +1,40 @@
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Now with the Policy
+step  500 	 episode 1  -  500.0
+step  1000 	 episode 2  -  500.0
+step  1500 	 episode 3  -  500.0
+step  2000 	 episode 4  -  500.0
+step  2500 	 episode 5  -  500.0
+step  3000 	 episode 6  -  500.0
+step  3500 	 episode 7  -  500.0
+step  4000 	 episode 8  -  500.0
+step  4500 	 episode 9  -  500.0
+step  5000 	 episode 10  -  500.0
+Average Reward:  500.0 
+
+Now with the Tree
+step  5500 	 episode 1  -  500.0
+step  6000 	 episode 2  -  500.0
+step  6500 	 episode 3  -  500.0
+step  7000 	 episode 4  -  500.0
+step  7500 	 episode 5  -  500.0
+step  8000 	 episode 6  -  500.0
+step  8500 	 episode 7  -  500.0
+step  9000 	 episode 8  -  500.0
+step  9500 	 episode 9  -  500.0
+step  10000 	 episode 10  -  500.0
+Average Reward:  500.0 
+
+Now with the Code
+step  10500 	 episode 1  -  500.0
+step  11000 	 episode 2  -  500.0
+step  11500 	 episode 3  -  500.0
+step  12000 	 episode 4  -  500.0
+step  12500 	 episode 5  -  500.0
+step  13000 	 episode 6  -  500.0
+step  13500 	 episode 7  -  500.0
+step  14000 	 episode 8  -  500.0
+step  14500 	 episode 9  -  500.0
+step  14969 	 episode 10  -  469.0
+Average Reward:  496.9 

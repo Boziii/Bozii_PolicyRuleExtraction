@@ -22,8 +22,10 @@ while stepcount <= 400 or done==False:
         episodeCount += 1
         obs = env.reset()
 
+
 print("Now with Better Predict")
-while stepcount <= 2000 or done==False:
+episodeCount = 1
+while episodeCount <= 10 or done==False:
     action= [betterPredict(obs)]
     obs, rewards, done, info = env.step(action[0])
     currentRewardForEpisode += rewards

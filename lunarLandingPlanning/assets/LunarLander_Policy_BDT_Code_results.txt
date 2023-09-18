@@ -1,0 +1,76 @@
+step  331 	 episode 1  -  [252.70422]
+step  646 	 episode 2  -  [246.20844]
+step  928 	 episode 3  -  [263.23398]
+step  1265 	 episode 4  -  [260.517]
+step  1564 	 episode 5  -  [266.46194]
+step  1877 	 episode 6  -  [253.31143]
+step  2203 	 episode 7  -  [269.67084]
+step  2555 	 episode 8  -  [232.87764]
+step  2869 	 episode 9  -  [267.18176]
+step  3184 	 episode 10  -  [248.3406]
+Now with the Tree
+step  3354 	 episode 1  -  -510.55191692880413
+step  3574 	 episode 2  -  -20.139117334639295
+step  3674 	 episode 3  -  -675.5948668105686
+step  4067 	 episode 4  -  151.0239266071946
+step  4319 	 episode 5  -  -12.9176549607201
+step  4554 	 episode 6  -  -46.511324231974996
+step  4951 	 episode 7  -  171.19503265067002
+step  5721 	 episode 8  -  179.81857882496212
+step  5848 	 episode 9  -  -110.42638325661262
+step  6244 	 episode 10  -  196.34815935614333
+Now with the Code
+step  6858 	 episode 1  -  223.00605229516566
+step  7023 	 episode 2  -  -505.07409500793756
+step  7122 	 episode 3  -  -680.0758634497688
+step  7500 	 episode 4  -  -93.14316394598588
+step  7895 	 episode 5  -  185.75956859385497
+step  8235 	 episode 6  -  168.71246493210418
+step  8637 	 episode 7  -  164.54200939543244
+step  8933 	 episode 8  -  234.06599859547197
+step  9174 	 episode 9  -  -58.18902771661723
+step  9422 	 episode 10  -  -42.04359690880679
+
+
+
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Now with the Policy
+step  281 	 episode 1  -  247.88322
+step  522 	 episode 2  -  271.4161
+step  1132 	 episode 3  -  224.7037
+step  1584 	 episode 4  -  252.97151
+step  1885 	 episode 5  -  250.92981
+step  2144 	 episode 6  -  253.67899
+step  2458 	 episode 7  -  238.05815
+step  2755 	 episode 8  -  235.39513
+step  3123 	 episode 9  -  258.54886
+step  3460 	 episode 10  -  263.1012
+Average Reward:  249.66867 
+
+Now with the Tree
+step  4460 	 episode 1  -  67.37572050893156
+step  4540 	 episode 2  -  -337.64070644515795
+step  4854 	 episode 3  -  194.98131578105878
+step  5073 	 episode 4  -  -5.527737836918988
+step  5331 	 episode 5  -  -55.007150520140044
+step  5454 	 episode 6  -  -125.75809067106744
+step  5774 	 episode 7  -  245.69279778266417
+step  6131 	 episode 8  -  194.21925268079394
+step  6568 	 episode 9  -  241.6795801579458
+step  6859 	 episode 10  -  243.801081821743
+Average Reward:  66.38160632598529 
+
+Now with the Code
+step  7225 	 episode 1  -  179.0662513200093
+step  7292 	 episode 2  -  -274.64117604118326
+step  7680 	 episode 3  -  208.079865093762
+step  8680 	 episode 4  -  63.64253233795415
+step  9680 	 episode 5  -  70.8430972090393
+step  9919 	 episode 6  -  -74.24747103630624
+step  10218 	 episode 7  -  -68.3366180297276
+step  10402 	 episode 8  -  -185.18713430466528
+step  10657 	 episode 9  -  -335.373215551876
+step  10826 	 episode 10  -  -71.32460421714742
+Average Reward:  -48.7478473220141 
+

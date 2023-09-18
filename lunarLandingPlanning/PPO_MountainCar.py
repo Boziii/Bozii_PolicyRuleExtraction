@@ -1,6 +1,6 @@
 import gym
 
-from stable_baselines3 import PPO
+from stable_baselines3 import DQN
 from stable_baselines3.common.evaluation import evaluate_policy
 
 #from StAcPair import StAcPair
@@ -8,13 +8,17 @@ from sklearn import tree
 from matplotlib import pyplot as plt
 import joblib
 
-env = gym.make("MountainCarContinuous-v0")
+env = gym.make("MountainCar-v0")
 
-model = PPO("MlpPolicy", env, verbose=1)
+policyFN = "policies/dqn_mountainCar_policy_15e4T_01"
+treeFN = "decisionTrees/dqn_mountainCar_policy_15e4T_01_decision_tree_alpha_013x10e-3"
+imageFN = "assets/mountainCar_decistion_tree.png"
+
+model = DQN("MlpPolicy", env, verbose=1)
  #Train the agent and display a progress bar
-model.learn(total_timesteps=int(25e4), progress_bar=True)
+model.learn(total_timesteps=int(15e4), progress_bar=True)
  #Save the agent
-model.save("ppo_mountainCar_policy_25e4T_01")
+model.save(policyFN)
 del model  # delete trained model to demonstrate loading
 
 
@@ -22,7 +26,7 @@ del model  # delete trained model to demonstrate loading
 # NOTE: if you have loading issue, you can pass `print_system_info=True`
 # to compare the system on which the model was trained vs the current one
 # model = DQN.load("dqn_lunar", env=env, print_system_info=True)
-model = PPO.load("ppo_mountainCar_policy_25e4T_01", env=env)
+model = DQN.load(policyFN, env=env)
 
 
 # Evaluate the agent
@@ -63,9 +67,9 @@ classification_tree = classification_tree.fit(stateDataset, actionDataset)
 
 
 
-joblib.dump(classification_tree, "ppo_mountainCar_policy_25e4T_01_decision_tree_alpha_013x10e-3")
+joblib.dump(classification_tree, treeFN)
 del classification_tree
-classification_tree = joblib.load("ppo_mountainCar_policy_25e4T_01_decision_tree_alpha_013x10e-3")
+classification_tree = joblib.load(treeFN)
 
 text_representation = tree.export_text(classification_tree)
 print(text_representation)
@@ -87,4 +91,4 @@ _ = tree.plot_tree(classification_tree,
                    filled=True,
                    fontsize = 10)
 
-fig.savefig("mountainCar_decistion_tree.png")
+fig.savefig(imageFN)

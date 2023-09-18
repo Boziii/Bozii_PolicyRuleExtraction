@@ -24,7 +24,7 @@ env = gym.make("CartPole-v1")
 # NOTE: if you have loading issue, you can pass `print_system_info=True`
 # to compare the system on which the model was trained vs the current one
 # model = DQN.load("dqn_lunar", env=env, print_system_info=True)
-model = PPO.load("ppo_cartPole_policy_25e4T_01", env=env)
+model = PPO.load("policies/ppo_cartPole_policy_25e4T_01", env=env)
 
 
 # Evaluate the agent

@@ -179,17 +179,10 @@ class ruleExtractor:
         print("\n\n\n")
         print("# of rules: ", len(ruleTreeList))
         print("\n\n")
-        print("When to do action: ", class_names[0])
-        print(ruleTreeList[0].toString())
-        print("\n\n")
-        print("When to do action: ", class_names[1])
-        print(ruleTreeList[1].toString())
-        print("\n\n")
-        print("When to do action: ", class_names[2])
-        print(ruleTreeList[2].toString())
-        print("\n\n")
-        print("When to do action: ", class_names[3])
-        print(ruleTreeList[3].toString())
+        for i in range(len(ruleTreeList)):
+            print("When to do action: ", class_names[i])
+            print(ruleTreeList[i].toString())
+            print("\n\n")
     
         print("\n\n")
         
