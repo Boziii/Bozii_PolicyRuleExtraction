@@ -22,7 +22,7 @@ env = gym.make("LunarLander-v2")
 # NOTE: if you have loading issue, you can pass `print_system_info=True`
 # to compare the system on which the model was trained vs the current one
 # model = DQN.load("dqn_lunar", env=env, print_system_info=True)
-model = PPO.load("ppo_lunar_policy_25e4T_04", env=env)
+model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
 
 
 # Evaluate the agent
@@ -34,19 +34,33 @@ print("mean reward: ", mean_reward)
 print("std reward: ", std_reward)
 
 # Enjoy trained agent
+currentRewardForEpisode= 0
+stepcount = 0
+episodeCount = 1
+episodeMax = 40
+done = False
+
 vec_env = model.get_env()
 obs = vec_env.reset()
 print(obs)
 print(obs[0])
 stateDataset = []
 actionDataset = []
-for i in range(4000):
+
+while episodeCount <= episodeMax or done==False:
     action, _states = model.predict(obs, deterministic=True)
     stateDataset.append(obs[0])
     actionDataset.append(action)
-    obs, rewards, dones, info = vec_env.step(action)
+    obs, rewards, done, info = vec_env.step(action)
+    currentRewardForEpisode += rewards
+    stepcount += 1
     vec_env.render()
-
+    if(done):
+        print("step ", stepcount, "\t episode",episodeCount," - ",  currentRewardForEpisode[0])
+        currentRewardForEpisode= 0
+        episodeCount += 1
+        obs = vec_env.reset()
+    
 
 env.close()
 
@@ -56,26 +70,36 @@ print(landerFeatureNames)
 print(landerTargetNames)
 
 #initialize our decision tree object
-classification_tree = tree.DecisionTreeClassifier(random_state=0, ccp_alpha=0.013)
+#classification_tree = tree.DecisionTreeClassifier(random_state=0, ccp_alpha=0.013)
+classification_tree = tree.DecisionTreeClassifier()
 
 #train our decision tree (tree induction and pruning)
 classification_tree = classification_tree.fit(stateDataset, actionDataset)
 
 
 #chang filename to right path
-joblib.dump(classification_tree, "ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
+joblib.dump(classification_tree, "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
 del classification_tree
-classification_tree = joblib.load("ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
+classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
 
-text_representation = tree.export_text(classification_tree)
-print(text_representation)
+#text_representation = tree.export_text(classification_tree)
+#print(text_representation)
 
-obs = vec_env.reset()
-for i in range(1000):
-    action= classification_tree.predict([obs[0]])
-    obs, rewards, dones, info = vec_env.step(action)
-    vec_env.render()
-
+print("Now with the Tree")
+episodeCount = 1
+stepcount = 0
+obs = env.reset()
+while episodeCount <= 10 or done==False:
+    action= classification_tree.predict([obs])
+    obs, rewards, done, info = env.step(action[0])
+    currentRewardForEpisode += rewards
+    env.render()
+    stepcount += 1
+    if(done):
+        print("step ", stepcount, "\t seed",episodeCount," - ",  currentRewardForEpisode)
+        currentRewardForEpisode= 0
+        episodeCount += 1
+        obs = env.reset()
 
 env.close()
 

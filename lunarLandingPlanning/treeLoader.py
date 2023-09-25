@@ -10,13 +10,15 @@ from featureClass import getCartPoleFeaturesAndTarget
 from featureClass import getLanderFeaturesAndTarget
 from codeGenerator import codeGenerator
 
-#env = gym.make("LunarLander-v2")
-env = gym.make("CartPole-v1")
+#env = gym.make("CartPole-v1")
+env = gym.make("LunarLander-v2")
+
 
 
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_02")
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
-classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_tree_alpha_013x10e-3")
+#classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_tree_alpha_013x10e-3")
+classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
 
 text_representation = tree.export_text(classification_tree)
 print(text_representation)
@@ -27,7 +29,8 @@ obs = env.reset()
 
 
 ruleExtractorVar = ruleExtractor()
-landerFeatures, landerTargetNames = getCartPoleFeaturesAndTarget()
+#landerFeatures, landerTargetNames = getCartPoleFeaturesAndTarget()
+landerFeatures, landerTargetNames = getLanderFeaturesAndTarget()
 print(list(map(lambda feature: feature.name,landerFeatures)))
 
 
@@ -38,7 +41,7 @@ for r in ruleExtractorVar.printedTreeRules:
 
 ruleTrees = ruleExtractorVar.make_rule_trees(classification_tree, landerFeatures, landerTargetNames)
 
-cgVar = codeGenerator("betterCartPoleCode", landerFeatures, landerTargetNames)
+cgVar = codeGenerator("Tree40epLanderCode", landerFeatures, landerTargetNames)
 cgVar.ruleTrees = ruleTrees
 cgVar.printToFile()
 

@@ -74,3 +74,31 @@ step  10657 	 episode 9  -  -335.373215551876
 step  10826 	 episode 10  -  -71.32460421714742
 Average Reward:  -48.7478473220141 
 
+
+
+
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Now with the Policy
+step  328 	 seed 962 	 episode 1  -  228.10957
+step  638 	 seed 750 	 episode 2  -  243.50555
+step  923 	 seed 716 	 episode 3  -  236.37195
+step  1244 	 seed 537 	 episode 4  -  247.17401
+step  1564 	 seed 773 	 episode 5  -  229.7691
+Average Reward:  236.98604 
+
+Now with the Tree
+step  1807 	 episode 1  -  -45.808162451975356
+step  2225 	 episode 2  -  161.62926782495254
+step  2466 	 episode 3  -  -44.05804447728731
+step  2889 	 episode 4  -  81.60508604552996
+step  3220 	 episode 5  -  220.55237200195813
+Average Reward:  74.78410378863559 
+
+Now with the Code
+step  3708 	 episode 1  -  144.4256185875875
+step  4126 	 episode 2  -  161.62926782495254
+step  4519 	 episode 3  -  188.88967231205567
+step  5006 	 episode 4  -  131.16008604000692
+step  5344 	 episode 5  -  210.9489832657854
+Average Reward:  167.4107256060776 

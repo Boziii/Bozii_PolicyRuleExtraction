@@ -1,0 +1,53 @@
+Wrapping the env with a `Monitor` wrapper
+Wrapping the env in a DummyVecEnv.
+Now with the Random Agent
+step  97 	 seed 353 	 episode 1  -  -101.685372654395
+step  194 	 seed 445 	 episode 2  -  -190.76533932254603
+step  323 	 seed 465 	 episode 3  -  -27.50945306394773
+step  392 	 seed 368 	 episode 4  -  -133.13632370512866
+step  512 	 seed 197 	 episode 5  -  -75.93815997038642
+step  589 	 seed 249 	 episode 6  -  -121.37512098748915
+step  665 	 seed 297 	 episode 7  -  -241.39987679812447
+step  760 	 seed 286 	 episode 8  -  -176.71292789771897
+step  832 	 seed 688 	 episode 9  -  -128.7012830936995
+step  927 	 seed 660 	 episode 10  -  -111.28992883613225
+Average Reward:  -130.85137863295682 
+
+Now with the Policy
+step  1234 	 seed 353 	 episode 1  -  239.18904
+step  1569 	 seed 445 	 episode 2  -  252.5658
+step  1924 	 seed 465 	 episode 3  -  258.93048
+step  2214 	 seed 368 	 episode 4  -  258.16626
+step  2483 	 seed 197 	 episode 5  -  23.021996
+step  2770 	 seed 249 	 episode 6  -  248.12782
+step  3038 	 seed 297 	 episode 7  -  281.5473
+step  3360 	 seed 286 	 episode 8  -  227.99284
+step  3647 	 seed 688 	 episode 9  -  237.53291
+step  3951 	 seed 660 	 episode 10  -  259.79367
+Average Reward:  228.68681 
+
+Now with the Tree
+step  4235 	 seed 353 	 episode 1  -  -75.69169766727468
+step  4562 	 seed 445 	 episode 2  -  238.40340310394438
+step  4711 	 seed 465 	 episode 3  -  -186.52143457169467
+step  5049 	 seed 368 	 episode 4  -  196.04132614020364
+step  5234 	 seed 197 	 episode 5  -  -542.0094267654536
+step  5463 	 seed 249 	 episode 6  -  -81.60615240975622
+step  5760 	 seed 297 	 episode 7  -  271.79884963432625
+step  5980 	 seed 286 	 episode 8  -  -74.75031097571684
+step  6344 	 seed 688 	 episode 9  -  169.3325286975902
+step  6608 	 seed 660 	 episode 10  -  -50.42333009655958
+Average Reward:  -13.54262449103911 
+
+Now with the Code
+step  6825 	 seed 353 	 episode 1  -  -137.18508109231163
+step  7160 	 seed 445 	 episode 2  -  229.03725428312654
+step  7309 	 seed 465 	 episode 3  -  -182.95645310443734
+step  7633 	 seed 368 	 episode 4  -  207.4832220845351
+step  7823 	 seed 197 	 episode 5  -  -570.9197044710529
+step  8191 	 seed 249 	 episode 6  -  211.20809567966177
+step  8488 	 seed 297 	 episode 7  -  271.79884963432625
+step  8904 	 seed 286 	 episode 8  -  201.44337154703717
+step  9180 	 seed 688 	 episode 9  -  -56.10873903248135
+step  9444 	 seed 660 	 episode 10  -  -50.42333009655958
+Average Reward:  12.3377485431844 
