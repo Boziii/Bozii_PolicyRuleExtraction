@@ -96,7 +96,7 @@ while episodeCount <= 10 or done==False:
     env.render()
     stepcount += 1
     if(done):
-        print("step ", stepcount, "\t seed",episodeCount," - ",  currentRewardForEpisode)
+        print("step ", stepcount, "\t episode",episodeCount," - ",  currentRewardForEpisode)
         currentRewardForEpisode= 0
         episodeCount += 1
         obs = env.reset()

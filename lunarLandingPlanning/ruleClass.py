@@ -32,7 +32,8 @@ class conditionClass:
     def getConditionString(self):
         conditionString = ""
         if self.feature.type == "number":
-            conditionString = f"({self.feature.name} {self.binaryOp} {np.round(self.threshold, 3)})"
+            #conditionString = f"({self.feature.name} {self.binaryOp} {np.round(self.threshold, 3)})"
+            conditionString = f"({self.feature.name} {self.binaryOp} {self.threshold})"
         elif self.feature.type == "bool":
             conditionString = f"({self.feature.name} {self.binaryOp} {self.threshold})"
         return conditionString

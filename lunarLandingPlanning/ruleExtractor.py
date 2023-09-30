@@ -32,6 +32,7 @@ class ruleExtractor:
                 p2 += [rightCondition.getConditionString()]
                 recurse(tree_.children_right[node], p2, paths)
             else:
+                #test = tree_.value[node]
                 path += [(tree_.value[node], tree_.n_node_samples[node])]
                 paths += [path]
                 

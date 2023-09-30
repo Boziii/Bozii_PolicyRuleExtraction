@@ -24,3 +24,13 @@ def getCartPoleFeaturesAndTarget():
         cartPoleFeatures.append(envFeature(cartPoleFeatureNames[i], cartPoleFeatureTypes[i]))
 
     return cartPoleFeatures, cartPoleTargetNames
+
+def getMountainCarFeaturesAndTarget():
+    MountainCarFeatureNames = ["car_position", "car_velocity"]
+    MountainCarFeatureTypes = ["number", "number"]
+    MountainCarTargetNames = ["accelerate_left", "nothing", "accelerate_right"]
+    MountainCarFeatures = []
+    for i in range(0, 2):
+        MountainCarFeatures.append(envFeature(MountainCarFeatureNames[i], MountainCarFeatureTypes[i]))
+
+    return MountainCarFeatures, MountainCarTargetNames
