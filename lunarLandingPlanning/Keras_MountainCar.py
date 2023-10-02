@@ -34,9 +34,6 @@ done = False
 
 stateDataset = []
 actionDataset = []
-for i in range(env.action_space.n):
-    stateDataset.append(obs)
-    actionDataset.append(i)
     
 while episodeCount <= 10 or done==False:
     reshapedObs = np.reshape(obs, [-1, env.observation_space.shape[0]])
@@ -63,6 +60,11 @@ classification_tree = tree.DecisionTreeClassifier()
 
 #train our decision tree (tree induction and pruning)
 classification_tree = classification_tree.fit(stateDataset, actionDataset)
+
+print(classification_tree.classes_)
+treeText = tree.export_text(classification_tree, 
+                            feature_names=list(map(lambda feature: feature.name,MountainCarFeatures)))
+print(treeText)
 
 joblib.dump(classification_tree, "decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
 del classification_tree

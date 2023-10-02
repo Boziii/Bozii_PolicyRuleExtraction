@@ -1,0 +1,51 @@
+Now with the random
+step  200 	 seed 182 	 episode 1  -  -200.0
+step  400 	 seed 133 	 episode 2  -  -200.0
+step  600 	 seed 791 	 episode 3  -  -200.0
+step  800 	 seed 861 	 episode 4  -  -200.0
+step  1000 	 seed 183 	 episode 5  -  -200.0
+step  1200 	 seed 340 	 episode 6  -  -200.0
+step  1400 	 seed 357 	 episode 7  -  -200.0
+step  1600 	 seed 535 	 episode 8  -  -200.0
+step  1800 	 seed 801 	 episode 9  -  -200.0
+step  2000 	 seed 966 	 episode 10  -  -200.0
+Average Reward:  -200.0 
+
+Now with the policy
+step  105 	 seed 182 	 episode 1  -  -105.0
+step  210 	 seed 133 	 episode 2  -  -105.0
+step  295 	 seed 791 	 episode 3  -  -85.0
+step  379 	 seed 861 	 episode 4  -  -84.0
+step  484 	 seed 183 	 episode 5  -  -105.0
+step  589 	 seed 340 	 episode 6  -  -105.0
+step  694 	 seed 357 	 episode 7  -  -105.0
+step  799 	 seed 535 	 episode 8  -  -105.0
+step  904 	 seed 801 	 episode 9  -  -105.0
+step  1009 	 seed 966 	 episode 10  -  -105.0
+Average Reward:  -100.9 
+
+Now with the tree
+step  106 	 seed 182 	 episode 1  -  -106.0
+step  211 	 seed 133 	 episode 2  -  -105.0
+step  296 	 seed 791 	 episode 3  -  -85.0
+step  380 	 seed 861 	 episode 4  -  -84.0
+step  486 	 seed 183 	 episode 5  -  -106.0
+step  591 	 seed 340 	 episode 6  -  -105.0
+step  697 	 seed 357 	 episode 7  -  -106.0
+step  802 	 seed 535 	 episode 8  -  -105.0
+step  907 	 seed 801 	 episode 9  -  -105.0
+step  1013 	 seed 966 	 episode 10  -  -106.0
+Average Reward:  -101.3 
+
+Now with the code
+step  106 	 seed 182 	 episode 1  -  -106.0
+step  211 	 seed 133 	 episode 2  -  -105.0
+step  296 	 seed 791 	 episode 3  -  -85.0
+step  380 	 seed 861 	 episode 4  -  -84.0
+step  486 	 seed 183 	 episode 5  -  -106.0
+step  591 	 seed 340 	 episode 6  -  -105.0
+step  697 	 seed 357 	 episode 7  -  -106.0
+step  802 	 seed 535 	 episode 8  -  -105.0
+step  907 	 seed 801 	 episode 9  -  -105.0
+step  1013 	 seed 966 	 episode 10  -  -106.0
+Average Reward:  -101.3 

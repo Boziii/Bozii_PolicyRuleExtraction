@@ -57,7 +57,8 @@ class ruleExtractor:
             else:
                 classes = path[-1][0][0]
                 l = np.argmax(classes)
-                rule += f"class: {class_names[l]} (proba: {np.round(100.0*classes[l]/np.sum(classes),2)}%)"
+                actualClass = tree.classes_[l]
+                rule += f"class: {class_names[actualClass]} (proba: {np.round(100.0*classes[l]/np.sum(classes),2)}%)"
             rule += f" | based on {path[-1][1]:,} samples"
             rules += [rule]
         
@@ -75,12 +76,14 @@ class ruleExtractor:
             
             if tree_.feature[nodeIndex] == _tree.TREE_UNDEFINED:
                 #hit end of branch
-                newTreeNode = ruleTreeNode( actionLeaf(class_names, np.argmax(tree_.value[nodeIndex])))
+                argMaxValue = np.argmax(tree_.value[nodeIndex])
+                action = tree.classes_[argMaxValue]
+                newTreeNode = ruleTreeNode( actionLeaf(class_names, action))
                 if(nodeIndex in tree_.children_left):
                     nodeList[0].linkChain(newTreeNode, "left")
                 else:
                     nodeList[0].linkChain(newTreeNode, "right")
-                ruleTreeBranchList += [[np.argmax(tree_.value[nodeIndex]), nodeList]]
+                ruleTreeBranchList += [[action, nodeList]]
             else:
                 
                 n1, n2 = list(nodeList), list(copy.deepcopy(nodeList))
