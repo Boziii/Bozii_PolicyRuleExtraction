@@ -16,7 +16,6 @@ env = gym.make("LunarLander-v2")
 #env = gym.make("MountainCar-v0")
 
 
-
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_02")
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_alpha_013x10e-3")
 classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")

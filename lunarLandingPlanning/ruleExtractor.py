@@ -123,8 +123,6 @@ class ruleExtractor:
             print(branch[1][0].toString())
             print("\n"+class_names[branch[0]])
             
-        
-              
 #         
         ruleTreeList = []
         targetRules = []

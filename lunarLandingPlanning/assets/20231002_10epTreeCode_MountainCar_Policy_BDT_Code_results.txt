@@ -49,3 +49,6 @@ step  802 	 seed 535 	 episode 8  -  -105.0
 step  907 	 seed 801 	 episode 9  -  -105.0
 step  1013 	 seed 966 	 episode 10  -  -106.0
 Average Reward:  -101.3 
+
+
+
