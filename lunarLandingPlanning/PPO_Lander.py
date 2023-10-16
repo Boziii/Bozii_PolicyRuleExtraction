@@ -37,7 +37,7 @@ print("std reward: ", std_reward)
 currentRewardForEpisode= 0
 stepcount = 0
 episodeCount = 1
-episodeMax = 40
+episodeMax = 200
 done = False
 
 vec_env = model.get_env()
@@ -78,9 +78,9 @@ classification_tree = classification_tree.fit(stateDataset, actionDataset)
 
 
 #chang filename to right path
-joblib.dump(classification_tree, "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
+joblib.dump(classification_tree, "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
 del classification_tree
-classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
+classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
 
 #text_representation = tree.export_text(classification_tree)
 #print(text_representation)
