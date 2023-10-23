@@ -74,44 +74,78 @@ print(landerTargetNames)
 classification_tree = tree.DecisionTreeClassifier()
 
 #train our decision tree (tree induction and pruning)
-classification_tree = classification_tree.fit(stateDataset, actionDataset)
+stateDataset10eps = stateDataset[:10]
+stateDataset40eps = stateDataset[:40]
+stateDataset100eps = stateDataset[:100]
+
+actionDataset10eps = actionDataset[:10]
+actionDataset40eps = actionDataset[:40]
+actionDataset100eps = actionDataset[:100]
+
+# classification_tree10eps = classification_tree.fit(stateDataset10eps, actionDataset10eps)
+# classification_tree40eps = classification_tree.fit(stateDataset40eps, actionDataset40eps)
+# classification_tree100eps = classification_tree.fit(stateDataset100eps, actionDataset100eps)
+# classification_tree = classification_tree.fit(stateDataset, actionDataset)
+
+joblib.dump(stateDataset, "assets/ppo_lunar_200eps_states")
+joblib.dump(actionDataset, "assets/ppo_lunar_200eps_actions")
 
 
-#chang filename to right path
-joblib.dump(classification_tree, "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
-del classification_tree
-classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
+# joblib.dump(classification_tree10eps, "decisionTrees/ppo_lunar_pruned_tree_10eps")
+# joblib.dump(classification_tree40eps, "decisionTrees/ppo_lunar_pruned_tree_40eps")
+# joblib.dump(classification_tree100eps, "decisionTrees/ppo_lunar_pruned_tree_100eps")
+# joblib.dump(classification_tree, "decisionTrees/ppo_lunar_pruned_tree_200eps")
+# del classification_tree
+# classification_tree = joblib.load("decisionTrees/ppo_lunar_pruned_tree_200eps")
 
 #text_representation = tree.export_text(classification_tree)
 #print(text_representation)
 
-print("Now with the Tree")
-episodeCount = 1
-stepcount = 0
-obs = env.reset()
-while episodeCount <= 10 or done==False:
-    action= classification_tree.predict([obs])
-    obs, rewards, done, info = env.step(action[0])
-    currentRewardForEpisode += rewards
-    env.render()
-    stepcount += 1
-    if(done):
-        print("step ", stepcount, "\t episode",episodeCount," - ",  currentRewardForEpisode)
-        currentRewardForEpisode= 0
-        episodeCount += 1
-        obs = env.reset()
-
-env.close()
-
-
-fig = plt.figure(figsize=(300,50))
-_ = tree.plot_tree(classification_tree, 
-                   feature_names=landerFeatureNames,  
-                   class_names=landerTargetNames,
-                   filled=True,
-                   fontsize = 10)
-
-fig.savefig("assets/lander_decistion_tree01.png")
+# print("Now with the Tree")
+# episodeCount = 1
+# stepcount = 0
+# obs = env.reset()
+# while episodeCount <= 10 or done==False:
+#     action= classification_tree.predict([obs])
+#     obs, rewards, done, info = env.step(action[0])
+#     currentRewardForEpisode += rewards
+#     env.render()
+#     stepcount += 1
+#     if(done):
+#         print("step ", stepcount, "\t episode",episodeCount," - ",  currentRewardForEpisode)
+#         currentRewardForEpisode= 0
+#         episodeCount += 1
+#         obs = env.reset()
+# 
+# env.close()
+# 
+# 
+# fig = plt.figure(figsize=(50,50))
+# _ = tree.plot_tree(classification_tree, 
+#                    feature_names=landerFeatureNames,  
+#                    class_names=landerTargetNames,
+#                    filled=True,
+#                    fontsize = 10)
+# 
+# fig.savefig("assets/lander_200eps_decistion_tree_pruned.png")
+# 
+# fig = plt.figure(figsize=(50,50))
+# _ = tree.plot_tree(classification_tree10eps, 
+#                    feature_names=landerFeatureNames,  
+#                    class_names=landerTargetNames,
+#                    filled=True,
+#                    fontsize = 10)
+# 
+# fig.savefig("assets/lander_10eps_decistion_tree_pruned.png")
+# 
+# fig = plt.figure(figsize=(50,50))
+# _ = tree.plot_tree(classification_tree100eps, 
+#                    feature_names=landerFeatureNames,  
+#                    class_names=landerTargetNames,
+#                    filled=True,
+#                    fontsize = 10)
+# 
+# fig.savefig("assets/lander_100eps_decistion_tree_pruned.png")
 
 
 

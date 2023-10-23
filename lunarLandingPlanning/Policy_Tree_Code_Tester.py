@@ -7,20 +7,21 @@ import statistics
 import random
 import copy as copy
 
-whichEnv = 4
-episodeMax = 10
-seedList = random.sample(range(100, 1000), episodeMax)
+whichEnv = 5
+#episodeMax = 10
+#seedList = random.sample(range(100, 1000), episodeMax)
 printingCSV = True
 #seed of importance: 0, 1, 10, 100
-# episodeMax = 3
-# seedList = [787,228,435]
+seedList = [768]
+episodeMax = len(seedList)
 theSeed = 0
 agentList = [
-    ["random",[]], 
+    #["random",[]], 
     ["policy",[]], 
     ["tree",[]], 
-    ["code",[]]
+    #["code",[]]
     ]
+treeName = ""
 csvFileName = ""
 codePredict = []
 
@@ -44,18 +45,43 @@ elif(whichEnv == 3):
     env = gym.make("CartPole-v1")
     model = PPO.load("policies/ppo_cartPole_policy_25e4T_01", env=env)
     classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_tree_alpha_013x10e-3")
-    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results"
+    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_02"
     from generatedCode.Tree10epCartPoleCode import predict as CartPoleCode
     codePredict = CartPoleCode
     usesKeras = False
 elif(whichEnv == 4):
     env = gym.make("LunarLander-v2")
     model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
-    classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_10eps")
-    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies03"
+    treeName = "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies05"
     from generatedCode.Tree10epLanderCodeNoRounding import predict as LunarLanderPredict03
     codePredict = LunarLanderPredict03
     usesKeras = False
+    agentList.append(["tree 40 eps",[]])
+    agentList.append(["tree 100 eps",[]])
+    agentList.append(["tree 200 eps",[]])
+elif(whichEnv == 5):
+    env = gym.make("CartPole-v1")
+    model = PPO.load("policies/ppo_cartPole_policy_25e4T_01", env=env)
+    treeName = "decisionTrees/ppo_cartPole_policy_25e4T_01_decision_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_forFunsies"
+    from generatedCode.Tree10epCartPoleCodeNoRounding import predict as CartPoleCode01
+    codePredict = CartPoleCode01
+    usesKeras = False
+    agentList.append(["tree 40 eps",[]])
+    agentList.append(["tree 100 eps",[]])
+    agentList.append(["tree 200 eps",[]])
+elif(whichEnv == 6):
+    env = gym.make("MountainCar-v0")
+    model = K.models.load_model('{}'.format("policies/MountainCar-v0_target_model_1543419126.88.h5"))
+    treeName = "decisionTrees/kera_MountainCar_policy_decision_tree_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_kera_MountainCar_policy_10eps_results_forFunsies"
+    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode
+    codePredict = MountainCarCode
+    usesKeras = True
     agentList.append(["tree 40 eps",[]])
     agentList.append(["tree 100 eps",[]])
     agentList.append(["tree 200 eps",[]])
@@ -64,8 +90,8 @@ else:
     model = K.models.load_model('{}'.format("policies/MountainCar-v0_target_model_1543419126.88.h5"))
     classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
     csvFileName = "CSV_kera_MountainCar_policy_10eps_results"
-    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode
-    codePredict = MountainCarCode
+    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode01
+    codePredict = MountainCarCode01
     usesKeras = True
 
 env.seed(theSeed)
@@ -140,12 +166,12 @@ def printVerticalCSV():
     
 
 for agent in agentList:
-    if(agent[0] == "tree 40 eps" and whichEnv == 4):
-        classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
-    elif(agent[0] == "tree 100 eps" and whichEnv == 4):
-        classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_100eps")
-    elif(agent[0] == "tree 200 eps" and whichEnv == 4):
-        classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
+    if(agent[0] == "tree 40 eps"):
+        classification_tree = classification_tree = joblib.load(treeName + "40eps")
+    elif(agent[0] == "tree 100 eps"):
+        classification_tree = classification_tree = joblib.load(treeName + "100eps")
+    elif(agent[0] == "tree 200 eps"):
+        classification_tree = classification_tree = joblib.load(treeName + "200eps")
     runAgent(agent, usesKeras)
 
 #printVerticalCSV()

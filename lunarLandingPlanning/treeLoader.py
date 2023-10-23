@@ -11,8 +11,8 @@ from featureClass import getLanderFeaturesAndTarget
 from featureClass import getMountainCarFeaturesAndTarget
 from codeGenerator import codeGenerator
 
-#env = gym.make("CartPole-v1")
-env = gym.make("LunarLander-v2")
+env = gym.make("CartPole-v1")
+#env = gym.make("LunarLander-v2")
 #env = gym.make("MountainCar-v0")
 
 
@@ -21,13 +21,13 @@ env = gym.make("LunarLander-v2")
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_10eps")
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
 #classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_100eps")
-classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
-landerFeatures, landerTargetNames = getLanderFeaturesAndTarget()
-codeFileName = "Tree200epLanderCodeNoRounding"
+# classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_200eps")
+# landerFeatures, landerTargetNames = getLanderFeaturesAndTarget()
+# codeFileName = "Tree200epLanderCodeNoRounding"
 
-# classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_tree_alpha_013x10e-3")
-# landerFeatures, landerTargetNames = getCartPoleFeaturesAndTarget()
-# codeFileName = "Tree10epCartPoleCode"
+classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_10eps")
+landerFeatures, landerTargetNames = getCartPoleFeaturesAndTarget()
+codeFileName = "Tree10epCartPoleCodeNoRounding"
 
 # classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
 # landerFeatures, landerTargetNames = getMountainCarFeaturesAndTarget()

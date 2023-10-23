@@ -12,6 +12,7 @@ envName = "MountainCar-v0"
 env = gym.make(envName)
 
 modelFileName = "policies/MountainCar-v0_target_model_1543419126.88.h5"
+episodeMax = 200
 totalIters = 100
 expectedReward = -110
 
@@ -35,7 +36,7 @@ done = False
 stateDataset = []
 actionDataset = []
     
-while episodeCount <= 10 or done==False:
+while episodeCount <= episodeMax or done==False:
     reshapedObs = np.reshape(obs, [-1, env.observation_space.shape[0]])
     action = np.argmax(model.predict(reshapedObs, verbose=0))
     stateDataset.append(obs)
@@ -66,9 +67,9 @@ treeText = tree.export_text(classification_tree,
                             feature_names=list(map(lambda feature: feature.name,MountainCarFeatures)))
 print(treeText)
 
-joblib.dump(classification_tree, "decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
+joblib.dump(classification_tree, "decisionTrees/kera_MountainCar_policy_decision_tree_200eps")
 del classification_tree
-classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
+classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_200eps")
 
 
 print("Now with the Tree")
