@@ -8,12 +8,12 @@ import random
 import copy as copy
 
 whichEnv = 5
-#episodeMax = 10
-#seedList = random.sample(range(100, 1000), episodeMax)
+episodeMax = 10
+seedList = random.sample(range(100, 1000), episodeMax)
 printingCSV = True
 #seed of importance: 0, 1, 10, 100
-seedList = [768]
-episodeMax = len(seedList)
+# seedList = [768]
+# episodeMax = len(seedList)
 theSeed = 0
 agentList = [
     #["random",[]], 
