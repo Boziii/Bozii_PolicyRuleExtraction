@@ -96,17 +96,14 @@ class ruleTreeNode:
         treeString = ""
         oldIndent = indent
         indent += "|   "
+        treeString = oldIndent + self.data.toString()
         if(self.leftChild != None):
-            treeString = oldIndent + self.data.toString()
             treeString += " L\n"+self.leftChild.toStringHelper(indent)
             if(self.rightChild != None):
                 treeString += "\n"+oldIndent+"else"
                 treeString += "\n"+self.rightChild.toStringHelper(indent)
         elif(self.rightChild != None):
-            treeString = oldIndent + self.data.toString()
             treeString += " R\n"+self.rightChild.toStringHelper(indent)
-        else:
-            treeString = oldIndent + self.data.toString()
         return treeString
     
     def toPython(self, indent):
@@ -119,21 +116,18 @@ class ruleTreeNode:
         treeString = ""
         oldIndent = indent
         indent += "\t"
+        treeString = oldIndent + self.data.toPython()
         if(self.leftChild != None):
-            treeString = oldIndent + self.data.toPython()
             treeString += "\n"+self.leftChild.toPythonHelper(indent)
             if(self.rightChild != None):
                 treeString += "\n"+oldIndent+"else:"
                 treeString += "\n"+self.rightChild.toPythonHelper(indent)
         elif(self.rightChild != None):
-            treeString = oldIndent + self.data.toPython()
             treeString += "\n"+self.rightChild.toPythonHelper(indent)
-        else:
-            treeString = oldIndent + self.data.toPython()
         return treeString
             
 class sNode:
-    def __init__(self, lNode, rNode):
-        self.left = lNode
-        self.right = rNode
+    def __init__(self, tree1, tree2):
+        self.tree1 = tree1
+        self.tree2 = tree2
 #             

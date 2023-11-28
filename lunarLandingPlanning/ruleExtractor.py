@@ -99,7 +99,6 @@ class ruleExtractor:
                         n1[0].linkChain(newTreeNode, "left")
                     else:
                         n1[0].linkChain(newTreeNode, "right")
-                    #n1[0].linkChain(newTreeNode, "left")
                 recurse(tree_.children_left[nodeIndex], n1, ruleTreeBranchList)
                     
                 newTreeNode = ruleTreeNode(conditionClass(featureList[featVal], threshold, False))
@@ -110,7 +109,6 @@ class ruleExtractor:
                         n2[0].linkChain(newTreeNode, "left")
                     else:
                         n2[0].linkChain(newTreeNode, "right")
-                    #n2[0].linkChain(newTreeNode, "right")
                 recurse(tree_.children_right[nodeIndex], n2, ruleTreeBranchList)
         
 
@@ -143,20 +141,19 @@ class ruleExtractor:
                 n = s[-1]
                 s.pop();
                 
-                if(n.left == None or n.right == None):
+                if(n.tree1 == None or n.tree2 == None):
                     continue
                 
-                #n.left.data = n.right.data
-                if(n.left.leftChild == None):
-                    n.left.leftChild = n.right.leftChild
+                if(n.tree1.leftChild == None):
+                    n.tree1.leftChild = n.tree2.leftChild
                 else:
-                    t=sNode(n.left.leftChild, n.right.leftChild)
+                    t=sNode(n.tree1.leftChild, n.tree2.leftChild)
                     s.append(t)
                 
-                if(n.left.rightChild == None):
-                    n.left.rightChild = n.right.rightChild
+                if(n.tree1.rightChild == None):
+                    n.tree1.rightChild = n.tree2.rightChild
                 else:
-                    t=sNode(n.left.rightChild, n.right.rightChild)
+                    t=sNode(n.tree1.rightChild, n.tree2.rightChild)
                     s.append(t)
             
             return ruletree1

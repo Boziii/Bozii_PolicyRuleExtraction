@@ -73,8 +73,18 @@ if(doGraphs):
 else:
     landerFeatureNames = ["lander x", "lander y", "x velocity", "y velocity", "angle", "angle velocity", "left leg contact", "right leg contact"]
     landerTargetNames = ["nothing", "left engine", "main engine", "right engine"]
-    classification_tree = tree.DecisionTreeClassifier(random_state=0, ccp_alpha=0.0001)
-    classification_tree = classification_tree.fit(stateDataset, actionDataset)
+    classification_tree = tree.DecisionTreeClassifier()#random_state=0, ccp_alpha=0.0001)
+    
+    stateDataset10eps = stateDataset[0:10]
+    stateDataset40eps = stateDataset[0:40]
+    stateDataset100eps = stateDataset[0:100]
+    
+    actionDataset10eps = actionDataset[0:10]
+    actionDataset40eps = actionDataset[0:40]
+    actionDataset100eps = actionDataset[0:100]
+    print(len(actionDataset))
+    
+    classification_tree = classification_tree.fit(stateDataset100eps, actionDataset100eps)
     #text_representation = tree.export_text(classification_tree)
     print("depth: ", classification_tree.tree_.max_depth)
     print("node count: ", classification_tree.tree_.node_count)

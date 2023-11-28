@@ -7,56 +7,68 @@ import statistics
 import random
 import copy as copy
 
-whichEnv = 5
-episodeMax = 10
+whichEnv = 1
+episodeMax = 5
 seedList = random.sample(range(100, 1000), episodeMax)
 printingCSV = True
 #seed of importance: 0, 1, 10, 100
-# seedList = [768]
-# episodeMax = len(seedList)
+#seedList = [402]
+episodeMax = len(seedList)
 theSeed = 0
 agentList = [
-    #["random",[]], 
+    ["random",[]], 
     ["policy",[]], 
     ["tree",[]], 
-    #["code",[]]
+    ["code",[]]
     ]
 treeName = ""
 csvFileName = ""
 codePredict = []
 
 if(whichEnv == 1):
-    env = gym.make("LunarLander-v2")
-    model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
-    classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_02")
-    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies"
-    from generatedCode.betterlanderCode import predict as LunarLanderPredict01
-    codePredict = LunarLanderPredict01
-    usesKeras = False
-elif(whichEnv == 2):
-    env = gym.make("LunarLander-v2")
-    model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
-    classification_tree = joblib.load("decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_40eps")
-    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_40eps_results"
-    from generatedCode.Tree40epLanderCodeNoRounding import predict as LunarLanderPredict02
-    codePredict = LunarLanderPredict02
-    usesKeras = False
-elif(whichEnv == 3):
     env = gym.make("CartPole-v1")
     model = PPO.load("policies/ppo_cartPole_policy_25e4T_01", env=env)
-    classification_tree = joblib.load("decisionTrees/ppo_cartPole_policy_25e4T_01_decision_tree_alpha_013x10e-3")
-    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_02"
-    from generatedCode.Tree10epCartPoleCode import predict as CartPoleCode
-    codePredict = CartPoleCode
+    treeName = "decisionTrees/BDT_20231102/ppo_cartPole_policy_25e4T_01_BDT_20231102_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_forFunsies01"
+    from generatedCode.Tree10epCartPoleCodeNoRounding import predict as CartPoleCode01
+    codePredict = CartPoleCode01
     usesKeras = False
+    agentList.append(["tree 40 eps",[]])
+    agentList.append(["tree 100 eps",[]])
+    agentList.append(["tree 200 eps",[]])
+elif(whichEnv == 2):
+    env = gym.make("MountainCar-v0")
+    model = K.models.load_model('{}'.format("policies/MountainCar-v0_target_model_1543419126.88.h5"))
+    treeName = "decisionTrees/BDT_20231102/dqn_MountainCar_policy_BDT_20231102_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_kera_MountainCar_policy_10eps_results_forFunsies01"
+    from generatedCode.Tree10epMountainCarCodeNoRounding import predict as MountainCarCode
+    codePredict = MountainCarCode
+    usesKeras = True
+    agentList.append(["tree 40 eps",[]])
+    agentList.append(["tree 100 eps",[]])
+    agentList.append(["tree 200 eps",[]])
+elif(whichEnv == 3):
+    env = gym.make("LunarLander-v2")
+    model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
+    treeName = "decisionTrees/BDT_20231102/ppo_lunar_policy_25e4T_04_BDT_20231102_"
+    classification_tree = joblib.load(treeName + "10eps")
+    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies10"
+    from generatedCode.Tree10epLanderCodeNoRounding import predict as LunarLanderPredict03
+    codePredict = LunarLanderPredict03
+    usesKeras = False
+    agentList.append(["tree 40 eps",[]])
+    agentList.append(["tree 100 eps",[]])
+    agentList.append(["tree 200 eps",[]])
 elif(whichEnv == 4):
     env = gym.make("LunarLander-v2")
     model = PPO.load("policies/ppo_lunar_policy_25e4T_04", env=env)
     treeName = "decisionTrees/ppo_lunar_policy_25e4T_04_decision_tree_"
     classification_tree = joblib.load(treeName + "10eps")
-    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies05"
-    from generatedCode.Tree10epLanderCodeNoRounding import predict as LunarLanderPredict03
-    codePredict = LunarLanderPredict03
+    csvFileName = "CSV_ppo_lunar_policy_25e4T_04_10eps_results_forFunsies08"
+    from generatedCode.Tree10epLanderCodeNoRounding import predict as LunarLanderPredict04
+    codePredict = LunarLanderPredict04
     usesKeras = False
     agentList.append(["tree 40 eps",[]])
     agentList.append(["tree 100 eps",[]])
@@ -66,9 +78,9 @@ elif(whichEnv == 5):
     model = PPO.load("policies/ppo_cartPole_policy_25e4T_01", env=env)
     treeName = "decisionTrees/ppo_cartPole_policy_25e4T_01_decision_"
     classification_tree = joblib.load(treeName + "10eps")
-    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_forFunsies"
-    from generatedCode.Tree10epCartPoleCodeNoRounding import predict as CartPoleCode01
-    codePredict = CartPoleCode01
+    csvFileName = "CSV_ppo_cartPole_policy_25e4T_01_10eps_results_forFunsies01"
+    from generatedCode.Tree10epCartPoleCodeNoRounding import predict as CartPoleCode02
+    codePredict = CartPoleCode02
     usesKeras = False
     agentList.append(["tree 40 eps",[]])
     agentList.append(["tree 100 eps",[]])
@@ -78,9 +90,9 @@ elif(whichEnv == 6):
     model = K.models.load_model('{}'.format("policies/MountainCar-v0_target_model_1543419126.88.h5"))
     treeName = "decisionTrees/kera_MountainCar_policy_decision_tree_"
     classification_tree = joblib.load(treeName + "10eps")
-    csvFileName = "CSV_kera_MountainCar_policy_10eps_results_forFunsies"
-    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode
-    codePredict = MountainCarCode
+    csvFileName = "CSV_kera_MountainCar_policy_10eps_results_forFunsies01"
+    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode01
+    codePredict = MountainCarCode01
     usesKeras = True
     agentList.append(["tree 40 eps",[]])
     agentList.append(["tree 100 eps",[]])
@@ -90,9 +102,11 @@ else:
     model = K.models.load_model('{}'.format("policies/MountainCar-v0_target_model_1543419126.88.h5"))
     classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_10eps")
     csvFileName = "CSV_kera_MountainCar_policy_10eps_results"
-    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode01
-    codePredict = MountainCarCode01
+    from generatedCode.Tree10epMountainCarCode import predict as MountainCarCode02
+    codePredict = MountainCarCode02
     usesKeras = True
+
+csvFileName = "CSV_10epDemo"
 
 env.seed(theSeed)
 obs = env.reset()
@@ -129,6 +143,7 @@ def runAgent(agent, useKeras):
         if(done):
             print("step ", stepcount, "\t seed", seedList[episodeCount], "\t episode",episodeCount," - ",  currentRewardForEpisode)
             episodeRewards.append(currentRewardForEpisode)
+            stepcount = 0
             currentRewardForEpisode= 0
             episodeCount += 1
             if(episodeCount < episodeMax):

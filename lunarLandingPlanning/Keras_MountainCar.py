@@ -28,48 +28,54 @@ print(obs)
 print(obs[0])
 print(env.action_space)
 
-episodeCount = 1
+episodeCount = 0
 stepcount = 0
 currentRewardForEpisode = 0
 done = False
 
 stateDataset = []
 actionDataset = []
+episodeStopPoint = []
     
-while episodeCount <= episodeMax or done==False:
+while episodeCount < episodeMax or done==False:
     reshapedObs = np.reshape(obs, [-1, env.observation_space.shape[0]])
     action = np.argmax(model.predict(reshapedObs, verbose=0))
     stateDataset.append(obs)
     actionDataset.append(action)
     obs, rewards, done, info = env.step(action)
     currentRewardForEpisode += rewards
-    env.render()
+    #env.render()
     stepcount += 1
     if(done):
         print("step ", stepcount, "\t episode",episodeCount," - ",  currentRewardForEpisode)
         currentRewardForEpisode= 0
         episodeCount += 1
         obs = env.reset()
+        if(episodeCount == 10 or episodeCount == 40 or episodeCount == 100 or episodeCount == 200):
+            episodeStopPoint.append(len(actionDataset))
         
 env.close()
 
 
 MountainCarFeatures, MountainCarTargetNames = getMountainCarFeaturesAndTarget()
 #initialize our decision tree object
-#classification_tree = tree.DecisionTreeClassifier(random_state=0, ccp_alpha=0.013)
+
 classification_tree = tree.DecisionTreeClassifier()
 
-#train our decision tree (tree induction and pruning)
-classification_tree = classification_tree.fit(stateDataset, actionDataset)
-
-print(classification_tree.classes_)
-treeText = tree.export_text(classification_tree, 
-                            feature_names=list(map(lambda feature: feature.name,MountainCarFeatures)))
-print(treeText)
-
-joblib.dump(classification_tree, "decisionTrees/kera_MountainCar_policy_decision_tree_200eps")
+print("episode stop points:", episodeStopPoint)
+treeName = "decisionTrees/BDT_20231102/dqn_MountainCar_policy_BDT_20231102_"
+assetFileLocation = "assets/stateAndActionCollections/dqn_mountainCar_"
+xEpNamingList = ["10eps", "40eps", "100eps", "200eps"]
+for i in range(4):
+    xEpStateDataset = stateDataset[:episodeStopPoint[i]]
+    xEpActionDataset = actionDataset[:episodeStopPoint[i]]
+    classification_tree = classification_tree.fit(xEpStateDataset, xEpActionDataset)
+    joblib.dump(classification_tree, treeName+xEpNamingList[i])
+    joblib.dump(xEpStateDataset, assetFileLocation+xEpNamingList[i]+"_states")
+    joblib.dump(xEpActionDataset, assetFileLocation+xEpNamingList[i]+"_actions")
+    
 del classification_tree
-classification_tree = joblib.load("decisionTrees/kera_MountainCar_policy_decision_tree_200eps")
+classification_tree = joblib.load(treeName+"200eps")
 
 
 print("Now with the Tree")

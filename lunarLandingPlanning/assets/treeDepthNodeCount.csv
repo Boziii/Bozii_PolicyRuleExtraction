@@ -1,0 +1,5 @@
+# of training episodes, max depth, node count, max depth, node count, max depth, node count
+10eps, 12, 351, 7, 37, 30, 1125
+40eps, 17, 1117, 10, 65, 34, 3585
+100eps, 19, 2309, 10, 73, 36, 8003
+200eps, 21, 4157, 11, 77, 31, 14641
